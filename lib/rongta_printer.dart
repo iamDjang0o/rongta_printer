@@ -1,5 +1,6 @@
-import 'dart:typed_data';
+import 'package:flutter/widgets.dart';
 
+import 'helpers/widget_to_image_converter.dart';
 import 'rongta_printer_platform_interface.dart';
 
 class RongtaPrinter {
@@ -16,10 +17,10 @@ class RongtaPrinter {
   }
 
   Future<void> print({
-    required Uint8List doc,
+    required Widget doc,
   }) async {
     return await RongtaPrinterPlatform.instance.print(
-      doc: doc,
+      doc: await createImageFromWidget(doc),
     );
   }
 }
