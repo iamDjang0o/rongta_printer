@@ -75,6 +75,25 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
   }
 
+  Widget? connectionStatusWidget() {
+    switch (connectionStatus) {
+      case PrinterConnectionStatus.initial:
+        return null;
+      case PrinterConnectionStatus.loading:
+        return const CircularProgressIndicator();
+      case PrinterConnectionStatus.connected:
+        return const Icon(
+          Icons.check_circle,
+          color: Colors.green,
+        );
+      case PrinterConnectionStatus.disconnected:
+        return const Icon(
+          Icons.error,
+          color: Colors.red,
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -87,13 +106,26 @@ class _MyAppState extends State<MyApp> {
             ListTile(
               title: const Text('Printer connection status'),
               subtitle: Text(connectionStatus.name),
-              trailing: connectionStatus != PrinterConnectionStatus.loading
-                  ? null
-                  : const CircularProgressIndicator(),
+              trailing: connectionStatusWidget(),
             ),
             ListTile(
               title: const Text('Printer operation status'),
               subtitle: Text(operationStatus.name),
+            ),
+            ElevatedButton(
+              onPressed: connectionStatus == PrinterConnectionStatus.connected
+                  ? () {
+                      _rongtaPrinterPlugin.print(
+                        doc: Column(
+                          children: const [
+                            FlutterLogo(),
+                            Text('Rongta printing example'),
+                          ],
+                        ),
+                      );
+                    }
+                  : null,
+              child: const Text('Print a test doc'),
             ),
           ],
         ),
