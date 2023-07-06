@@ -49,14 +49,16 @@ class MethodChannelRongtaPrinter extends RongtaPrinterPlatform {
   }
 
   @override
-  Future<Function> print({
+  Future<Uint8List> print({
     required Uint8List doc,
   }) async {
-    return await methodChannel.invokeMethod(
+    await methodChannel.invokeMethod(
       'print',
       {
         'doc': doc,
       },
     );
+
+    return doc;
   }
 }

@@ -33,7 +33,7 @@ abstract class RongtaPrinterPlatform extends PlatformInterface {
     throw UnimplementedError('init() has not been implemented.');
   }
 
-  Future<void> print({
+  Future<Uint8List> print({
     required Uint8List doc,
   }) {
     throw UnimplementedError('print() has not been implemented.');
