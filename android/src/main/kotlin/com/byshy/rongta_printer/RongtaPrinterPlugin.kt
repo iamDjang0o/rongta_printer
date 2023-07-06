@@ -3,6 +3,8 @@ package com.byshy.rongta_printer
 import android.bluetooth.BluetoothAdapter
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Handler
+import android.os.Looper
 import com.rt.printerlibrary.bean.BluetoothEdrConfigBean
 import com.rt.printerlibrary.cmd.EscFactory
 import com.rt.printerlibrary.enumerate.CommonEnum
@@ -102,14 +104,20 @@ class RongtaPrinterPlugin : FlutterPlugin, MethodCallHandler, ConnectListener {
     }
 
     override fun onPrinterConnected(p0: Any?) {
-        channel.invokeMethod("on_printer_connected", null)
+        Handler(Looper.getMainLooper()).post {
+            channel.invokeMethod("on_printer_connected", null)
+        }
     }
 
     override fun onPrinterDisconnect(p0: Any?) {
-        channel.invokeMethod("on_printer_disconnected", null)
+        Handler(Looper.getMainLooper()).post {
+            channel.invokeMethod("on_printer_disconnected", null)
+        }
     }
 
     override fun onPrinterWritecompletion(p0: Any?) {
-        channel.invokeMethod("on_printer_write_completion", null)
+        Handler(Looper.getMainLooper()).post {
+            channel.invokeMethod("on_printer_write_completion", null)
+        }
     }
 }

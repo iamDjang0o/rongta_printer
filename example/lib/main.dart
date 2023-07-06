@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:rongta_printer/core/enums.dart';
 import 'package:rongta_printer/rongta_printer.dart';
 
 void main() {
@@ -16,35 +19,60 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  PrinterConnectionStatus connectionStatus = PrinterConnectionStatus.initial;
+  PrinterOperationStatus operationStatus = PrinterOperationStatus.idle;
+
   final _rongtaPrinterPlugin = RongtaPrinter();
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    initRongtaPlugin();
+  }
+
+  void onConnectionStatusChanged(PrinterConnectionStatus status) {
+    log(connectionStatus.name, name: 'onConnectionStatusChanged');
+
+    setState(() {
+      connectionStatus = status;
+    });
+  }
+
+  void onOperationStatusChanged(PrinterOperationStatus status) {
+    log(operationStatus.name, name: 'onOperationStatusChanged');
+
+    setState(() {
+      operationStatus = status;
+    });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
+  Future<void> initRongtaPlugin() async {
     try {
-      platformVersion =
-          await _rongtaPrinterPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        connectionStatus = PrinterConnectionStatus.loading;
+
+        log(connectionStatus.name, name: 'initRongtaPlugin');
+
+        setState(() {});
+      });
+
+      await _rongtaPrinterPlugin.init(
+        macAddress: 'DC:0D:30:95:39:A2',
+        onPrinterConnectionChange: onConnectionStatusChanged,
+        onDocPrinted: onOperationStatusChanged,
+      );
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      log(
+        'Unable to initialize the rongta printer plugin',
+        name: 'initRongtaPlugin',
+      );
     }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
@@ -52,10 +80,22 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Rongta printer example'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: [
+            ListTile(
+              title: const Text('Printer connection status'),
+              subtitle: Text(connectionStatus.name),
+              trailing: connectionStatus != PrinterConnectionStatus.loading
+                  ? null
+                  : const CircularProgressIndicator(),
+            ),
+            ListTile(
+              title: const Text('Printer operation status'),
+              subtitle: Text(operationStatus.name),
+            ),
+          ],
         ),
       ),
     );

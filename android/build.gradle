@@ -47,5 +47,5 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('libs/printer_library.jar')
+    api files('libs/printer_library.jar')
 }

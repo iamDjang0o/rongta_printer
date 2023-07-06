@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import 'core/types.dart';
 import 'rongta_printer_method_channel.dart';
 
 abstract class RongtaPrinterPlatform extends PlatformInterface {
@@ -27,8 +28,8 @@ abstract class RongtaPrinterPlatform extends PlatformInterface {
 
   Future<void> init({
     required String macAddress,
-    Function(bool isConnected)? onPrinterConnectionChange,
-    Function()? onDocPrinted,
+    OnPrinterConnectionChange? onPrinterConnectionChange,
+    OnPrinterOperationChange? onDocPrinted,
   }) {
     throw UnimplementedError('init() has not been implemented.');
   }

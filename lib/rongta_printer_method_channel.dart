@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+import 'core/enums.dart';
+import 'core/types.dart';
 import 'rongta_printer_platform_interface.dart';
 
 /// An implementation of [RongtaPrinterPlatform] that uses method channels.
@@ -12,26 +14,26 @@ class MethodChannelRongtaPrinter extends RongtaPrinterPlatform {
   @override
   Future<void> init({
     required String macAddress,
-    Function(bool isConnected)? onPrinterConnectionChange,
-    Function()? onDocPrinted,
+    OnPrinterConnectionChange? onPrinterConnectionChange,
+    OnPrinterOperationChange? onDocPrinted,
   }) async {
     methodChannel.setMethodCallHandler((call) {
       switch (call.method) {
         case 'on_printer_connected':
           if (onPrinterConnectionChange != null) {
-            onPrinterConnectionChange(true);
+            onPrinterConnectionChange(PrinterConnectionStatus.connected);
           }
 
           break;
         case 'on_printer_disconnected':
           if (onPrinterConnectionChange != null) {
-            onPrinterConnectionChange(false);
+            onPrinterConnectionChange(PrinterConnectionStatus.disconnected);
           }
 
           break;
         case 'on_printer_write_completion':
           if (onDocPrinted != null) {
-            onDocPrinted();
+            onDocPrinted(PrinterOperationStatus.idle);
           }
 
           break;
