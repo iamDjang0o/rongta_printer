@@ -36,7 +36,7 @@ Future<Uint8List> createImageFromWidget(
     ..finalizeTree();
 
   final RenderView renderView = RenderView(
-    window: WidgetsBinding.instance.window,
+    view: WidgetsBinding.instance.window,
     child: RenderPositionedBox(
       alignment: Alignment.center,
       child: repaintBoundary,

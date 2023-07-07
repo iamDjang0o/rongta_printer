@@ -3,7 +3,7 @@ description: A Flutter plugin to help developers to integrate with Rongta printe
 version: 0.0.1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=2.19.2 <4.0.0'
   flutter: ">=2.5.0"
 
 dependencies:
