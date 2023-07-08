@@ -2,17 +2,15 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rongta_printer/core/types.dart';
-// import 'package:rongta_printer/rongta_printer.dart';
 import 'package:rongta_printer/rongta_printer_platform_interface.dart';
 import 'package:rongta_printer/rongta_printer_method_channel.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockRongtaPrinterPlatform
-    with MockPlatformInterfaceMixin
-    implements RongtaPrinterPlatform {
-
+class MockRongtaPrinterPlatform implements RongtaPrinterPlatform {
   @override
-  Future<void> init({required String macAddress, OnPrinterConnectionChange? onPrinterConnectionChange, OnPrinterOperationChange? onDocPrinted}) {
+  Future<void> init(
+      {required String macAddress,
+      OnPrinterConnectionChange? onPrinterConnectionChange,
+      OnPrinterOperationChange? onDocPrinted}) {
     // TODO: implement init
     throw UnimplementedError();
   }

@@ -1,30 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
 import 'core/types.dart';
 import 'rongta_printer_method_channel.dart';
 
-abstract class RongtaPrinterPlatform extends PlatformInterface {
+abstract class RongtaPrinterPlatform {
   /// Constructs a RongtaPrinterPlatform.
-  RongtaPrinterPlatform() : super(token: _token);
+  RongtaPrinterPlatform();
 
-  static final Object _token = Object();
-
-  static RongtaPrinterPlatform _instance = MethodChannelRongtaPrinter();
-
-  /// The default instance of [RongtaPrinterPlatform] to use.
-  ///
-  /// Defaults to [MethodChannelRongtaPrinter].
-  static RongtaPrinterPlatform get instance => _instance;
-
-  /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [RongtaPrinterPlatform] when
-  /// they register themselves.
-  static set instance(RongtaPrinterPlatform instance) {
-    PlatformInterface.verifyToken(instance, _token);
-    _instance = instance;
-  }
+  static RongtaPrinterPlatform instance = MethodChannelRongtaPrinter();
 
   Future<void> init({
     required String macAddress,
