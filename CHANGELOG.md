@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Provide documentation.
+ 
 ## 0.0.4
 
 * License update.
