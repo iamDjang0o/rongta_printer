@@ -7,10 +7,11 @@ import 'package:rongta_printer/rongta_printer_method_channel.dart';
 
 class MockRongtaPrinterPlatform implements RongtaPrinterPlatform {
   @override
-  Future<void> init(
-      {required String macAddress,
-      OnPrinterConnectionChange? onPrinterConnectionChange,
-      OnPrinterOperationChange? onDocPrinted}) {
+  Future<void> init({
+    required String macAddress,
+    OnPrinterConnectionChange? onPrinterConnectionChange,
+    OnPrinterOperationChange? onDocPrinted,
+  }) {
     // TODO: implement init
     throw UnimplementedError();
   }

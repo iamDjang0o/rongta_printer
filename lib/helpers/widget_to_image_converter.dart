@@ -8,6 +8,7 @@ const double _kDefaultWidth = 500.0;
 const double _kDefaultHeight = 3000.0;
 
 Future<Uint8List> createImageFromWidget(
+  BuildContext context,
   Widget widget, {
   double docWidth = _kDefaultWidth,
   double docHeight = _kDefaultHeight,
@@ -35,15 +36,17 @@ Future<Uint8List> createImageFromWidget(
     ..buildScope(rootElement)
     ..finalizeTree();
 
+  ui.FlutterView view = View.of(context);
+
   final RenderView renderView = RenderView(
-    window: WidgetsBinding.instance.window,
+    view: view,
     child: RenderPositionedBox(
       alignment: Alignment.center,
       child: repaintBoundary,
     ),
     configuration: ViewConfiguration(
       size: Size(docWidth, docHeight),
-      devicePixelRatio: ui.window.devicePixelRatio,
+      devicePixelRatio: view.devicePixelRatio,
     ),
   );
 
@@ -55,7 +58,7 @@ Future<Uint8List> createImageFromWidget(
     ..flushCompositingBits()
     ..flushPaint();
 
-  ui.Image image = await repaintBoundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+  ui.Image image = await repaintBoundary.toImage(pixelRatio: view.devicePixelRatio);
   ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
   Uint8List? result = byteData?.buffer.asUint8List();

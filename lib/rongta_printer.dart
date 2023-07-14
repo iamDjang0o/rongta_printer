@@ -19,11 +19,11 @@ class RongtaPrinter {
     );
   }
 
-  Future<Uint8List> print({
+  Future<Uint8List> print(BuildContext context, {
     required Widget doc,
   }) async {
     return await RongtaPrinterPlatform.instance.print(
-      doc: await createImageFromWidget(doc),
+      doc: await createImageFromWidget(context, doc),
     );
   }
 }

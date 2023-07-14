@@ -1,11 +1,11 @@
 name: rongta_printer
 description: A Flutter plugin to help developers to integrate with Rongta printers SDK.
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/byshy/rongta_printer/tree/main
 
 environment:
-  sdk: '>=2.19.2 <4.0.0'
-  flutter: ">=2.5.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   flutter:

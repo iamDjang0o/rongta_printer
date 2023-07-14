@@ -116,8 +116,9 @@ class _MyAppState extends State<MyApp> {
               onPressed: connectionStatus == PrinterConnectionStatus.connected
                   ? () {
                       _rongtaPrinterPlugin.print(
-                        doc: Column(
-                          children: const [
+                        context,
+                        doc: const Column(
+                          children: [
                             FlutterLogo(),
                             Text('Rongta printing example'),
                           ],
