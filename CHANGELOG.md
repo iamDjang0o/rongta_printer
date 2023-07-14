@@ -1,3 +1,7 @@
+## 0.0.4
+
+* License update.
+
 ## 0.0.3
 
 * Follow latest API standards.
