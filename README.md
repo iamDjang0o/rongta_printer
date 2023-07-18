@@ -20,6 +20,14 @@ dependencies:
   plugin_name: ^0.0.1
 ```
 
+## Setup
+
+The code works for Android out of the box, and has 1 step to setup iOS
+
+### 🔧 iOS Setup
+
+![alt text](https://github.com/byshy/rongta_printer/blob/main/assets/images/ios_setup_steps.png?raw=true)
+
 ## Usage
 
 Import the package into your Dart file:
@@ -65,7 +73,6 @@ _rongtaPrinterPlugin.print(
 ## Known Issues ❗️
 
 - Using `Image.memory` will not display anything, as the code loads images instantly, while loading from memory takes time.
-- iOS is not supported yet. 🚧
 
 ## License
 
