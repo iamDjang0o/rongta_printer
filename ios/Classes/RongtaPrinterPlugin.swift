@@ -7,9 +7,9 @@ public class RongtaPrinterPlugin: NSObject, FlutterPlugin {
     var printer: Printer!
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        channel = FlutterMethodChannel(name: "rongta_printer/channel", binaryMessenger: registrar.messenger())
         let instance = RongtaPrinterPlugin()
-        registrar.addMethodCallDelegate(instance, channel: channel)
+        instance.channel = FlutterMethodChannel(name: "rongta_printer/channel", binaryMessenger: registrar.messenger())
+        registrar.addMethodCallDelegate(instance, channel: instance.channel)
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

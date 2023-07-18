@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - rongta_printer (0.0.1):
+  - rongta_printer (1.0.0):
     - Flutter
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  rongta_printer: 2b4ef7852ffa06e91074de3e4cd24f5876a46345
+  rongta_printer: 667334714e97975258fab26b5c68f309cceddebd
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'rongta_printer'
-  s.version          = '0.0.1'
+  s.version          = '1.0.0'
   s.summary          = 'A new Flutter project.'
   s.description      = <<-DESC
 A new Flutter project.
@@ -19,6 +19,7 @@ A new Flutter project.
   s.platform = :ios, '11.0'
 
   s.static_framework = true
+  s.requires_arc = false
   s.preserve_paths = 'libRTPrinterSDK.a'
 
   # Flutter.framework does not contain a i386 slice.
@@ -33,5 +34,5 @@ A new Flutter project.
   }
 
   # Here the name of the library can include lib as the file name has it too.
-  s.vendored_libraries = 'libRTPrinterSDK'
+  s.vendored_libraries = 'libRTPrinterSDK.a'
 end

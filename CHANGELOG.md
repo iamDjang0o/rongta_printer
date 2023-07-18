@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Fix iOS support issues.
+
 ## 0.0.5
 
 * Provide documentation.
