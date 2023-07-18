@@ -26,6 +26,13 @@ The code works for Android out of the box, and has 1 step to setup iOS
 
 ### 🔧 iOS Setup
 
+To run the plugin on iOS, you need to add the bluetooth framework, to do so please follow these steps:
+1. Tap on runner from the left side navigator.
+2. Select the target from the targets list.
+3. Tap on build phases.
+4. Add a new "Link Binary With Libraries" by hitting the + button.
+5. Type "Bluetooth" in the search bar and choose the CoreBluetooth.framework.
+
 ![alt text](https://github.com/byshy/rongta_printer/blob/main/assets/images/ios_setup_steps.png?raw=true)
 
 ## Usage
