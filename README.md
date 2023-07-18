@@ -22,7 +22,7 @@ dependencies:
 
 ## Setup
 
-The code works for Android out of the box, and has 1 step to setup iOS
+The code works for Android out of the box, and has 1 step to setup iOS.
 
 ### 🔧 iOS Setup
 
