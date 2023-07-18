@@ -16,8 +16,7 @@ A Flutter plugin for printing using Rongta thermal printers. 🖨️
 Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
-dependencies:
-  plugin_name: ^1.0.0
+plugin_name: ^1.0.0
 ```
 
 ## Setup
