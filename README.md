@@ -17,7 +17,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  plugin_name: ^0.0.1
+  plugin_name: ^1.0.0
 ```
 
 ## Setup
