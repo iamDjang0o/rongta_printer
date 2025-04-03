@@ -28,7 +28,8 @@ Future<Uint8List> createImageFromWidget(
 
   final BuildOwner buildOwner = BuildOwner(focusManager: FocusManager());
 
-  final RenderObjectToWidgetElement<RenderBox> rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+  final RenderObjectToWidgetElement<RenderBox> rootElement =
+      RenderObjectToWidgetAdapter<RenderBox>(
     container: repaintBoundary,
     child: Directionality(
       textDirection: TextDirection.ltr,
@@ -56,7 +57,12 @@ Future<Uint8List> createImageFromWidget(
       child: repaintBoundary,
     ),
     configuration: ViewConfiguration(
-      size: Size(docWidth, docHeight),
+      physicalConstraints: BoxConstraints(
+        minWidth: docWidth,
+        maxWidth: docWidth,
+        minHeight: docHeight,
+        maxHeight: docHeight,
+      ),
       devicePixelRatio: view.devicePixelRatio,
     ),
   );
@@ -69,7 +75,8 @@ Future<Uint8List> createImageFromWidget(
     ..flushCompositingBits()
     ..flushPaint();
 
-  ui.Image image = await repaintBoundary.toImage(pixelRatio: view.devicePixelRatio);
+  ui.Image image =
+      await repaintBoundary.toImage(pixelRatio: view.devicePixelRatio);
   ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
   Uint8List? result = byteData?.buffer.asUint8List();
