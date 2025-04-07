@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:rongta_printer/core/enums.dart';
 import 'package:rongta_printer/rongta_printer.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,8 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final GlobalKey printKey = GlobalKey();
-
   PrinterConnectionStatus connectionStatus = PrinterConnectionStatus.initial;
   PrinterOperationStatus operationStatus = PrinterOperationStatus.idle;
 
@@ -59,10 +57,7 @@ class _MyAppState extends State<MyApp> {
 
         setState(() {});
       });
-
-      // Request Bluetooth permissions
       await _requestBluetoothPermissions();
-
       await _rongtaPrinterPlugin.init(
         macAddress: 'DC:0D:30:E0:1B:9B',
         onPrinterConnectionChange: onConnectionStatusChanged,
@@ -114,32 +109,38 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Builder(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: const Text('Rongta printer example'),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Connection status: ${connectionStatus.name}'),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      connectionStatus == PrinterConnectionStatus.connected
-                          ? () {
-                              _rongtaPrinterPlugin.print(
-                                context, // This context should now have an Overlay
-                                doc: const Text('Simple print test'),
-                              );
-                            }
-                          : null,
-                  child: const Text('Print a test doc'),
-                ),
-              ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Rongta printer example'),
+        ),
+        body: Column(
+          children: [
+            ListTile(
+              title: const Text('Printer connection status'),
+              subtitle: Text(connectionStatus.name),
+              trailing: connectionStatusWidget(),
             ),
-          ),
+            ListTile(
+              title: const Text('Printer operation status'),
+              subtitle: Text(operationStatus.name),
+            ),
+            ElevatedButton(
+              onPressed: connectionStatus == PrinterConnectionStatus.connected
+                  ? () {
+                      _rongtaPrinterPlugin.print(
+                        context,
+                        doc: const Column(
+                          children: [
+                            FlutterLogo(),
+                            Text('Rongta printing example'),
+                          ],
+                        ),
+                      );
+                    }
+                  : null,
+              child: const Text('Print a test doc'),
+            ),
+          ],
         ),
       ),
     );
