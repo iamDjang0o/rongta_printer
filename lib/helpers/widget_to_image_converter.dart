@@ -57,12 +57,11 @@ Future<Uint8List> createImageFromWidget(
       child: repaintBoundary,
     ),
     configuration: ViewConfiguration(
-      physicalConstraints: BoxConstraints(
-        minWidth: docWidth,
-        maxWidth: docWidth,
-        minHeight: docHeight,
-        maxHeight: docHeight,
-      ),
+      // size: ui.Size(docWidth, docHeight),
+      logicalConstraints:
+          BoxConstraints.tightFor(width: docWidth, height: docHeight),
+      physicalConstraints:
+          BoxConstraints.tightFor(width: docWidth, height: docHeight),
       devicePixelRatio: view.devicePixelRatio,
     ),
   );
